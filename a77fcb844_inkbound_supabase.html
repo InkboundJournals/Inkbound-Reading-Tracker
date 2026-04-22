@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Inkbound ✦ Your Legendary Reading Journal</title>
+
+<!-- FAVICON - SIMPLE ORNATE BOOK -->
+<!-- CUSTOM FAVICON — replace CUSTOM_FAVICON_URL with your image URL -->
+<link rel="icon" id="dynamic-favicon" type="image/png" href="https://base44.app/api/apps/69e19bd6330b5bde8cea1577/files/mp/public/69e19bd6330b5bde8cea1577/825c1e688_logo_nobg.png">
+<script>
+  (function(){
+    var fi = document.getElementById('dynamic-favicon');
+    if(false){
+      fi.setAttribute('type','image/svg+xml');
+      fi.setAttribute('href',"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><circle cx='50' cy='50' r='48' fill='none' stroke='%23d4a84c' stroke-width='1' opacity='0.5'/><path d='M35 25L50 20L65 25L65 65Q65 72 50 75Q35 72 35 65Z' fill='%23cc9900' stroke='%23ffd700' stroke-width='1.5'/><path d='M50 20L50 75' stroke='%23ffd700' stroke-width='2' opacity='0.7'/></svg>");
+    }
+  })();
+
+// Topbar sparkles
+(function(){
+  const container = document.getElementById('topbar-stars');
+  if (!container) return;
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = (40 + Math.random() * 55) + '%';
+    s.style.setProperty('--dur', (4 + Math.random() * 5) + 's');
+    s.style.setProperty('--del', (Math.random() * 6) + 's');
+    s.style.width = s.style.height = (Math.random() > 0.6 ? '3px' : '2px');
+    container.appendChild(s);
+  }
+})();
+
+</script>
+<meta name="theme-color" content="#0a0a0a">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root { --rad: 10px; --rad-lg: 16px; --tr: 0.22s ease; }
+
+/* ═══════════════════════════════════════════
+   GLOBAL TEXTURE OVERLAY — parchment grain
+   ═══════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+.panel {
+  box-shadow: var(--shad), inset 0 0 0 1px rgba(212,168,76,0.06), inset 0 1px 0 rgba(212,168,76,0.12);
+  position: relative;
+  overflow: hidden;
+}
+.panel::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(105deg, transparent 40%, rgba(212,168,76,0.07) 50%, transparent 60%);
+  animation: panel-shimmer 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes panel-shimmer {
+  0% { transform: translateX(-100%) rotate(5deg); opacity: 0; }
+  10% { opacity: 1; }
+  40% { transform: translateX(300%) rotate(5deg); opacity: 0; }
+  100% { transform: translateX(300%) rotate(5deg); opacity: 0; }
+}
+
+
+/* PREMIUM THEME - Dark Fantasy with MAGIC */
+[data-theme="premium"] {
+  --bg: #0a0a0a; --bg2: #1a1a1a; --bg3: #252525; --bg4: #0f0f0f; --brd: #3d3d3d; --brd2: #d4a84c;
+  --gold: #d4a84c; --goldl: #f0d878; --red: #9b2035; --redl: #cc3a55; --purple: #7040b0; --purplel: #a070d8;
+  --teal: #1e7070; --teallt: #30b0b0; --th: #f5eedd; --tp: #e8dfc8; --ts: #a89968; --tm: #806848;
+  --star: #d4a84c; --spice: #cc3a55; --shad: 0 8px 40px rgba(0,0,0,0.95); --glow: 0 0 40px rgba(212,168,76,0.35);
+  --fd: 'Cinzel Decorative', serif; --fh: 'Cinzel', serif; --fb: 'EB Garamond', Georgia, serif;
+  --fsz: 17px; --bgrad: linear-gradient(135deg, #d4a84c, #f0d878); --topbg: rgba(10,10,10,0.98);
+}
+[data-theme="premium"] body { 
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+[data-theme="premium"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(212,168,76,0.5), rgba(212,168,76,0)),
+    radial-gradient(2px 2px at 60px 70px, rgba(212,168,76,0.4), rgba(212,168,76,0)),
+    radial-gradient(1px 1px at 50px 50px, rgba(212,168,76,0.6), rgba(212,168,76,0)),
+    radial-gradient(1px 1px at 130px 80px, rgba(212,168,76,0.4), rgba(212,168,76,0)),
+    radial-gradient(2px 2px at 90px 10px, rgba(212,168,76,0.5), rgba(212,168,76,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  animation: twinkle 4s ease-in-out infinite;
+  z-index: 1;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+
+@keyframes aurora-drift {
+  0%, 100% { opacity: 0.4; transform: translateY(0px); }
+  50% { opacity: 0.8; transform: translateY(-20px); }
+}
+
+/* ═══════════════════════════════════════════════════
+   ENCHANTED THEME - Deep Fantasy Purple Magic
+   ═══════════════════════════════════════════════════ */
+@keyframes enchanted-twinkle {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════
+   BLOOM THEME - Feminine Floral Pinks & Blushes
+   ═══════════════════════════════════════════════════ */
+@keyframes bloom-drift {
+  0%, 100% { opacity: 0.7; transform: translateY(0px); }
+  50% { opacity: 1; transform: translateY(-8px); }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--tp); font-family: var(--fb); font-size: var(--fsz); line-height: 1.75; min-height: 100vh; transition: background .6s, color .6s; position: relative; z-index: 2; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(212,168,76,0.05); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; box-shadow: inset 0 0 10px rgba(212,168,76,0.3), 0 0 8px rgba(212,168,76,0.5); }
+
+/* REGAL HEADER */
+.topbar { 
+  background: linear-gradient(180deg, rgba(8,5,16,1) 0%, rgba(14,10,24,0.98) 60%, rgba(10,8,18,0.97) 100%);
+  border-bottom: 1px solid rgba(212,168,76,0.5);
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 30px 34px;
+  position: sticky; 
+  top: 0; 
+  z-index: 200; 
+  backdrop-filter: blur(24px);
+  overflow: hidden;
+  box-shadow: 
+    0 0 80px rgba(212,168,76,0.25),
+    0 0 160px rgba(212,168,76,0.08),
+    0 4px 40px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,235,120,0.15);
+}
+
+/* Radial gold centre glow */
+.topbar-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 100% at 50% 50%, rgba(212,168,76,0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 60% at 50% 0%,  rgba(212,168,76,0.10) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Floating sparkle particles */
+.topbar-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.topbar-stars span {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(212,168,76,0.9);
+  animation: ts-float var(--dur, 6s) ease-in-out infinite;
+  animation-delay: var(--del, 0s);
+  opacity: 0;
+}
+@keyframes ts-float {
+  0%   { opacity: 0;   transform: translateY(0px) scale(0.6); }
+  25%  { opacity: 1; }
+  75%  { opacity: 0.6; }
+  100% { opacity: 0;   transform: translateY(-50px) scale(1.4); }
+}
+
+
+
+/* Top shimmer line */
+.topbar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,168,76,0.8) 30%, rgba(255,230,100,1) 50%, rgba(212,168,76,0.8) 70%, transparent 100%);
+  z-index: 2;
+}
+
+/* Sweeping gold shimmer across full header */
+.topbar-shimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.topbar-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(212,168,76,0.12) 38%,
+    rgba(255,240,130,0.55) 48%,
+    rgba(255,255,200,0.75) 50%,
+    rgba(255,240,130,0.55) 52%,
+    rgba(212,168,76,0.12) 62%,
+    transparent 80%
+  );
+  animation: header-sweep 3.5s ease-in-out infinite;
+}
+@keyframes header-sweep {
+  0%   { left: -60%; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { left: 115%; opacity: 0; }
+}
+
+/* Make children sit above overlays */
+.topbar > *:not(.topbar-glow):not(.topbar-stars) {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+.brand-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.brand-title { 
+  font-family: var(--fd); 
+  font-size: 52px;
+  font-weight: 700;
+  background: linear-gradient(160deg,
+    #fffbe0 0%,
+    #f5d76e 18%,
+    #d4a84c 38%,
+    #fff5a0 52%,
+    #c8922a 68%,
+    #f0d878 82%,
+    #fffbe0 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  background-clip: text; 
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 0.10em;
+  animation: royal-glow 3s ease-in-out infinite, gold-shift 6s ease-in-out infinite;
+}
+
+@keyframes royal-glow {
+  0%, 100% { filter: drop-shadow(0 0 14px rgba(212,168,76,0.7)) drop-shadow(0 0 35px rgba(212,168,76,0.35)); }
+  50%       { filter: drop-shadow(0 0 30px rgba(255,235,120,1))  drop-shadow(0 0 70px rgba(212,168,76,0.7)) drop-shadow(0 0 110px rgba(255,200,50,0.3)); }
+}
+@keyframes gold-shift {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+
+/* ═══════════════════════════════════════════
+   THEME-SPECIFIC TOPBAR DECORATIONS
+   ═══════════════════════════════════════════ */
+
+.topbar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* PREMIUM THEME - Floating Stars */
+[data-theme="premium"] .topbar::after {
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(240,216,120,0.4) 0%, transparent 2%),
+    radial-gradient(circle at 25% 30%, rgba(212,168,76,0.3) 0%, transparent 1.5%),
+    radial-gradient(circle at 85% 25%, rgba(240,216,120,0.3) 0%, transparent 2%),
+    radial-gradient(circle at 90% 40%, rgba(212,168,76,0.25) 0%, transparent 1.5%),
+    radial-gradient(circle at 15% 80%, rgba(212,168,76,0.2) 0%, transparent 1.5%),
+    radial-gradient(circle at 82% 75%, rgba(240,216,120,0.25) 0%, transparent 1.5%);
+  animation: topbar-twinkle 4s ease-in-out infinite;
+}
+
+
+
+
+
+@keyframes topbar-twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes topbar-pulse-mystic {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes topbar-bloom-float {
+  0%, 100% { opacity: 0.2; transform: translateY(0px); }
+  50% { opacity: 0.4; transform: translateY(-8px); }
+}
+
+@keyframes topbar-warm-glow {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes topbar-aurora-shimmer {
+  0%, 100% { opacity: 0.25; }
+  25% { opacity: 0.45; }
+  50% { opacity: 0.3; }
+  75% { opacity: 0.4; }
+}
+
+.brand-center {
+  position: relative;
+  z-index: 2;
+}
+
+
+.brand-subtitle {
+  font-family: var(--fh);
+  font-size: 14px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg,
+    #c8922a 0%,
+    #f0d878 30%,
+    #fffbe0 50%,
+    #f0d878 70%,
+    #c8922a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 14px;
+  font-weight: 500;
+  animation: gold-shift 8s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+.brand-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin-top: 16px;
+  opacity: 0.6;
+}
+
+.topnav { 
+  display: flex; 
+  gap: 3px; 
+  justify-content: center; 
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.nbtn { 
+  font-family: var(--fh); 
+  font-size: 11px; 
+  letter-spacing: .14em; 
+  text-transform: uppercase; 
+  padding: 10px 18px; 
+  border: 1px solid var(--brd); 
+  background: transparent; 
+  color: var(--ts); 
+  cursor: pointer; 
+  border-radius: var(--rad); 
+  transition: var(--tr); 
+  white-space: nowrap; 
+}
+.nbtn:hover { 
+  color: var(--goldl); 
+  border-color: var(--gold); 
+  background: rgba(212,168,76,0.05); 
+  text-shadow: 0 0 10px rgba(212,168,76,0.3); 
+  box-shadow: 0 0 15px rgba(212,168,76,0.15); 
+}
+.nbtn.on { 
+  color: var(--goldl); 
+  border-color: var(--gold); 
+  background: rgba(212,168,76,0.12); 
+  box-shadow: 0 0 20px rgba(212,168,76,0.5), 0 0 40px rgba(212,168,76,0.15); 
+}
+
+/* SETTINGS MENU */
+.settings-menu-container {
+  position: fixed;
+  top: 28px;
+  left: 28px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.settings-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,168,76,0.5);
+  background: rgba(8,5,16,0.92);
+  color: var(--goldl);
+  cursor: pointer;
+  transition: var(--tr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(212,168,76,0.25), 0 4px 20px rgba(0,0,0,0.6);
+  backdrop-filter: blur(12px);
+}
+
+.settings-btn:hover {
+  border-color: rgba(212,168,76,0.9);
+  background: rgba(212,168,76,0.12);
+  box-shadow: 0 0 28px rgba(212,168,76,0.5), 0 4px 20px rgba(0,0,0,0.6);
+  transform: translateY(-2px);
+}
+
+.settings-btn.active {
+  background: rgba(212,168,76,0.14);
+  border-color: var(--gold);
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  right: auto;
+  background: linear-gradient(160deg, rgba(18,14,28,0.98) 0%, rgba(10,8,18,0.99) 100%);
+  border: 1px solid rgba(212,168,76,0.25);
+  border-radius: 16px;
+  padding: 18px 16px 14px;
+  min-width: 230px;
+  box-shadow: 0 12px 50px rgba(0,0,0,0.6), 0 0 30px rgba(212,168,76,0.12);
+  display: none;
+  z-index: 300;
+  backdrop-filter: blur(20px);
+  animation: slideDown 0.2s ease;
+}
+
+.settings-dropdown.active {
+  display: block;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-dropdown::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,168,76,0.5), transparent);
+  border-radius: 1px;
+}
+
+.settings-item {
+  padding: 6px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--fb);
+  font-size: 13px;
+  color: var(--ts);
+}
+
+.settings-item:last-child { border-bottom: none; }
+.settings-item:hover { background: transparent; }
+.settings-item.divider { padding: 10px 0; cursor: default; }
+.settings-item.divider:hover { background: transparent; }
+.settings-item hr { border: none; border-top: 1px solid rgba(212,168,76,0.12); width: 100%; }
+.settings-label { font-size: 11px; letter-spacing:.1em; text-transform: uppercase; opacity: 0.6; }
+.settings-value { color: var(--goldl); font-size: 12px; }
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--ts);
+  font-family: var(--fb);
+  font-size: 13px;
+  padding: 9px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--tr);
+  margin-top: 2px;
+  letter-spacing: .02em;
+  text-align: left;
+}
+
+.menu-btn:hover {
+  background: rgba(212,168,76,0.07);
+  color: var(--goldl);
+  padding-left: 10px;
+}
+
+.menu-btn.logout {
+  color: rgba(204,100,100,0.7);
+  margin-top: 4px;
+}
+
+.menu-btn.logout:hover {
+  background: rgba(155,32,53,0.1);
+  color: #cc8080;
+  padding-left: 10px;
+}
+
+.login-screen { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 1000; align-items: center; justify-content: center; }
+.login-screen.active ~ .settings-menu-container,
+#splash-screen:not(.fade-out) ~ .settings-menu-container { display: none; }
+.login-screen.active { display: flex; }
+.login-box { background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%); border: 2px solid var(--gold); border-radius: var(--rad-lg); padding: 50px 45px; max-width: 450px; width: 100%; box-shadow: var(--shad), var(--glow), 0 0 40px rgba(212,168,76,0.2); position: relative; overflow: hidden; }
+.login-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(212,168,76,0.1), transparent); pointer-events: none; }
+.login-logo-container { width: 200px; height: 200px; margin: 0 auto 25px; position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
+.login-logo-container svg { width: 100%; height: 100%; filter: drop-shadow(0 0 25px rgba(212,168,76,0.6)); animation: float 3s ease-in-out infinite; }
+@keyframes logo-float {
+  0%, 100% { 
+    transform: translateY(0px); 
+    filter: drop-shadow(0 0 20px rgba(212,168,76,0.8)) drop-shadow(0 0 50px rgba(212,168,76,0.45)) drop-shadow(0 0 10px rgba(255,215,0,0.6));
+  }
+  50% { 
+    transform: translateY(-10px); 
+    filter: drop-shadow(0 0 40px rgba(212,168,76,1)) drop-shadow(0 0 80px rgba(212,168,76,0.7)) drop-shadow(0 0 120px rgba(255,215,0,0.35));
+  }
+}
+/* Logo has transparent background — just animate it */
+.login-logo-container {
+  background: transparent;
+}
+#login-logo-img {
+  animation: logo-float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+.login-title { font-family: var(--fd); font-size: 32px; background: var(--bgrad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; text-align: center; position: relative; z-index: 1; }
+.login-subtitle { text-align: center; color: var(--ts); margin-bottom: 30px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; position: relative; z-index: 1; }
+.login-form { display: grid; gap: 18px; position: relative; z-index: 1; }
+.login-input { width: 100%; background: rgba(15,15,15,0.8); border: 1px solid var(--brd); color: var(--tp); font-family: var(--fb); font-size: 15px; padding: 13px 16px; border-radius: var(--rad); outline: none; transition: var(--tr); box-shadow: inset 0 0 10px rgba(0,0,0,0.3); }
+.login-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,168,76,0.3), inset 0 0 10px rgba(0,0,0,0.3); background: rgba(25,25,25,0.9); }
+.login-input::placeholder { color: var(--tm); opacity: 0.6; }
+
+.page { display: none; padding: 40px 30px; max-width: 1400px; margin: 0 auto; animation: fadeUp .32s ease; position: relative; z-index: 2; }
+.page.on { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.panel { background: linear-gradient(135deg, rgba(26,26,26,0.9) 0%, rgba(37,37,37,0.9) 100%); border: 1px solid var(--brd); border-radius: var(--rad); padding: 32px 36px; box-shadow: 0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(212,168,76,0.1), 0 0 20px rgba(212,168,76,0.1); margin-bottom: 28px; position: relative; backdrop-filter: blur(10px); overflow: hidden; }
+.panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); border-radius: var(--rad) var(--rad) 0 0; opacity: 0.6; }
+.panel::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at top left, rgba(212,168,76,0.03), transparent 60%); pointer-events: none; }
+
+.stitle { font-family: var(--fh); font-size: 16px; color: var(--goldl); letter-spacing: .12em; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; text-transform: uppercase; text-shadow: 0 0 10px rgba(212,168,76,0.2); position: relative; z-index: 1; }
+.stitle::before { content: '✦'; color: var(--gold); font-size: 14px; animation: twinkle-star 2s ease-in-out infinite; }
+@keyframes twinkle-star {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.stitle::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, var(--gold), transparent); opacity: 0.3; }
+
+label { display: block; font-family: var(--fh); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--ts); margin-bottom: 7px; }
+input[type="text"], input[type="password"], input[type="date"], input[type="number"], input[type="url"], input[type="file"], select, textarea {
+  width: 100%; background: rgba(15,15,15,0.7); border: 1px solid var(--brd); color: var(--tp); font-family: var(--fb); font-size: 15px;
+  padding: 11px 14px; border-radius: var(--rad); transition: var(--tr); outline: none; box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+}
+input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,168,76,0.3), inset 0 0 5px rgba(0,0,0,0.3); }
+textarea { resize: vertical; line-height: 1.8; }
+select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23d4a84c' d='M0 0l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer; }
+
+.fg { display: grid; gap: 14px; }
+.c2 { grid-template-columns: 1fr 1fr; }
+.c3 { grid-template-columns: 1fr 1fr 1fr; }
+@media(max-width:680px) { .c2, .c3 { grid-template-columns: 1fr; } }
+
+.btn { font-family: var(--fh); font-size: 11px; letter-spacing: .15em; text-transform: uppercase; padding: 12px 28px; border-radius: var(--rad); cursor: pointer; transition: var(--tr); border: 1px solid transparent; display: inline-block; line-height: 1; position: relative; overflow: hidden; }
+.btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%); transform: translateX(-100%); }
+.btn:hover::before { animation: shimmer 0.6s; }
+@keyframes shimmer { to { transform: translateX(100%); } }
+.bp { background: var(--bgrad); color: #0a0a0a; box-shadow: 0 6px 20px rgba(212,168,76,0.3), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 15px rgba(212,168,76,0.2); font-weight: 600; }
+.bp:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(212,168,76,0.5), inset 0 1px 0 rgba(255,255,255,0.3), 0 0 25px rgba(212,168,76,0.4); }
+.bg { background: transparent; border-color: var(--brd); color: var(--ts); }
+.bg:hover { border-color: var(--gold); color: var(--goldl); background: rgba(212,168,76,0.05); box-shadow: 0 0 15px rgba(212,168,76,0.2); }
+.bd { background: transparent; border-color: var(--red); color: var(--redl); }
+.bd:hover { background: rgba(155,32,53,0.1); }
+.bsm { padding: 6px 14px; font-size: 9px; }
+.brow { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+.srow { display: flex; gap: 4px; }
+.star { font-size: 22px; cursor: pointer; color: var(--star); opacity: .2; transition: transform .12s, opacity .12s, text-shadow .12s; user-select: none; line-height: 1; }
+.star.on { opacity: 1; filter: drop-shadow(0 0 8px rgba(212,168,76,0.6)); text-shadow: 0 0 10px rgba(212,168,76,0.5); }
+.star:hover { opacity: 1; transform: scale(1.25); text-shadow: 0 0 15px rgba(212,168,76,0.7); }
+.star.sp { color: var(--spice); opacity: .2; }
+.star.sp.on { opacity: 1; filter: drop-shadow(0 0 8px rgba(204,58,85,0.5)); }
+
+.badge { display: inline-block; font-family: var(--fh); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; background: rgba(212,168,76,.12); border: 1px solid var(--gold); color: var(--goldl); box-shadow: 0 0 10px rgba(212,168,76,0.15); }
+
+.twrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th { font-family: var(--fh); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ts); padding: 12px 10px; text-align: left; border-bottom: 2px solid rgba(212,168,76,0.3); white-space: nowrap; }
+tbody tr { border-bottom: 1px solid rgba(212,168,76,0.08); transition: all var(--tr); }
+tbody tr:hover { background: rgba(212,168,76,0.08); box-shadow: inset 0 0 10px rgba(212,168,76,0.05); }
+tbody td { padding: 12px 10px; vertical-align: middle; }
+
+.sgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.scard { background: linear-gradient(135deg, rgba(37,37,37,0.9) 0%, rgba(26,26,26,0.9) 100%); border: 1px solid var(--brd); border-radius: var(--rad); padding: 22px 16px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 0 15px rgba(212,168,76,0.1); transition: all var(--tr); }
+.scard:hover { transform: translateY(-4px); box-shadow: 0 6px 25px rgba(212,168,76,0.2), 0 0 20px rgba(212,168,76,0.15); }
+.scard::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--bgrad); opacity: 0.4; }
+.snum { font-family: var(--fd); font-size: 36px; background: var(--bgrad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1.1; text-shadow: 0 0 10px rgba(212,168,76,0.3); }
+.slbl { font-family: var(--fh); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ts); margin-top: 5px; }
+
+.charts-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+@media(max-width:900px) { .charts-row { grid-template-columns: 1fr 1fr; } }
+@media(max-width:560px) { .charts-row { grid-template-columns: 1fr; } }
+.chart-box { background: linear-gradient(145deg, rgba(20,15,5,0.95) 0%, rgba(12,9,2,0.97) 100%); border: 1px solid rgba(212,168,76,0.2); border-radius: 16px; padding: 22px 18px; box-shadow: 0 0 20px rgba(212,168,76,0.08), inset 0 1px 0 rgba(212,168,76,0.08); }
+.ctitle { font-family: var(--fh); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ts); margin-bottom: 16px; }
+.piewrap { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.piewrap canvas { max-width: 140px; max-height: 140px; filter: drop-shadow(0 0 12px rgba(212,168,76,0.35)); }
+.legwrap { flex: 1; min-width: 100px; }
+.legitem { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; color: var(--ts); }
+.legdot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 8px currentColor; }
+
+.ring-outer { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.ring-wrap { position: relative; width: 130px; height: 130px; flex-shrink: 0; }
+.ring-wrap svg { transform: rotate(-90deg); filter: drop-shadow(0 0 15px rgba(212,168,76,0.3)); }
+.ring-ctr { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.ring-pct { font-family: var(--fd); font-size: 26px; background: var(--bgrad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; text-shadow: 0 0 10px rgba(212,168,76,0.2); }
+.ring-lbl { font-family: var(--fh); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--ts); }
+.gbar-wrap { background: rgba(212,168,76,0.15); border-radius: 20px; height: 8px; overflow: hidden; margin-top: 10px; border: 1px solid rgba(212,168,76,0.3); box-shadow: inset 0 0 5px rgba(0,0,0,0.3); }
+.gbar { height: 100%; background: var(--bgrad); border-radius: 20px; transition: width .9s cubic-bezier(.22,.68,0,1.2); box-shadow: 0 0 15px rgba(212,168,76,0.4); }
+
+.eg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 18px; }
+.eg-card { background: linear-gradient(135deg, rgba(37,37,37,0.9) 0%, rgba(26,26,26,0.9) 100%); border: 1px solid var(--brd); border-radius: var(--rad); padding: 18px; position: relative; box-shadow: 0 0 10px rgba(212,168,76,0.08); transition: all var(--tr); }
+.eg-card:hover { box-shadow: 0 4px 20px rgba(212,168,76,0.15), 0 0 15px rgba(212,168,76,0.1); transform: translateY(-2px); }
+.eg-card .egt { font-family: var(--fh); font-size: 14px; color: var(--goldl); margin-bottom: 6px; padding-right: 22px; }
+.eg-card .egd { font-size: 13px; color: var(--ts); font-style: italic; margin-bottom: 10px; }
+.eg-card .egp { font-family: var(--fh); font-size: 11px; color: var(--ts); margin-bottom: 6px; }
+.egbw { background: rgba(212,168,76,0.15); border-radius: 10px; height: 6px; overflow: hidden; border: 1px solid rgba(212,168,76,0.3); }
+.egbar { height: 100%; background: var(--bgrad); border-radius: 10px; transition: width .6s ease; box-shadow: 0 0 10px rgba(212,168,76,0.3); }
+.eg-del { position: absolute; top: 10px; right: 10px; background: transparent; border: none; color: var(--tm); cursor: pointer; font-size: 14px; transition: color var(--tr); }
+.eg-del:hover { color: var(--redl); }
+
+.hmwrap { overflow-x: auto; padding-bottom: 6px; }
+.hm-cell { width: 14px; height: 14px; border-radius: 2px; background: rgba(212,168,76,0.12); border: 1px solid rgba(212,168,76,0.25); cursor: pointer; transition: all var(--tr); }
+.hm-cell.l1 { background: rgba(212,168,76,.3); border-color: rgba(212,168,76,.45); box-shadow: 0 0 8px rgba(212,168,76,0.25); }
+.hm-cell.l2 { background: rgba(212,168,76,.5); border-color: rgba(212,168,76,.65); box-shadow: 0 0 10px rgba(212,168,76,0.35); }
+.hm-cell.l3 { background: rgba(212,168,76,.7); border-color: rgba(212,168,76,.85); box-shadow: 0 0 12px rgba(212,168,76,0.45); }
+.hm-cell.l4 { background: var(--goldl); border-color: var(--gold); box-shadow: 0 0 15px rgba(212,168,76,0.6); }
+.hm-cell:hover { outline: 1px solid var(--gold); box-shadow: 0 0 12px rgba(212,168,76,0.5) !important; }
+.tooltip { position: fixed; background: rgba(26,26,26,0.98); border: 1.5px solid var(--gold); border-radius: 6px; padding: 8px 12px; font-family: var(--fh); font-size: 11px; color: var(--goldl); pointer-events: none; z-index: 600; display: none; white-space: nowrap; box-shadow: var(--shad), 0 0 15px rgba(212,168,76,0.3); }
+
+.yr-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin-top: 24px; }
+.ys { background: linear-gradient(135deg, rgba(37,37,37,0.9) 0%, rgba(26,26,26,0.9) 100%); border: 1px solid var(--brd); border-radius: var(--rad); padding: 16px; text-align: center; box-shadow: 0 0 12px rgba(212,168,76,0.1); transition: all var(--tr); }
+.ys:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(212,168,76,0.2), 0 0 15px rgba(212,168,76,0.1); }
+.ysn { font-family: var(--fd); font-size: 32px; background: var(--bgrad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 10px rgba(212,168,76,0.2); }
+.ysl { font-family: var(--fh); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: var(--ts); margin-top: 4px; }
+
+.mover { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 500; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(15px); }
+.mover.on { display: flex; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal { background: linear-gradient(135deg, rgba(26,26,26,0.98) 0%, rgba(37,37,37,0.98) 100%); border: 2px solid var(--gold); border-radius: var(--rad-lg); padding: 36px; max-width: 700px; width: 100%; max-height: 94vh; overflow-y: auto; box-shadow: var(--shad), var(--glow), 0 0 50px rgba(212,168,76,0.25); position: relative; animation: popIn .3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.modal::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--bgrad); border-radius: var(--rad-lg) var(--rad-lg) 0 0; opacity: 0.8; box-shadow: 0 0 15px rgba(212,168,76,0.3); }
+.mtitle { font-family: var(--fh); font-size: 18px; color: var(--goldl); margin-bottom: 24px; text-transform: uppercase; text-shadow: 0 0 8px rgba(212,168,76,0.2); }
+.mclose { position: absolute; top: 16px; right: 18px; background: transparent; border: none; color: var(--tm); font-size: 24px; cursor: pointer; padding: 4px 8px; transition: all var(--tr); }
+.mclose:hover { color: var(--redl); transform: rotate(90deg); }
+hr { border: none; border-top: 1px solid rgba(212,168,76,0.2); margin: 20px 0; }
+
+.shelf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; margin-top: 20px; }
+.book-card { background: linear-gradient(135deg, rgba(37,37,37,0.95) 0%, rgba(26,26,26,0.95) 100%); border: 1px solid var(--brd); border-radius: var(--rad); padding: 14px; text-align: center; position: relative; overflow: hidden; transition: all var(--tr); box-shadow: 0 0 12px rgba(212,168,76,0.1); }
+.book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--bgrad); border-radius: var(--rad) 0 0 var(--rad); }
+.book-card:hover { border-color: var(--gold); box-shadow: 0 6px 30px rgba(212,168,76,0.4), 0 0 30px rgba(212,168,76,0.25), 0 0 60px rgba(212,168,76,0.1); transform: translateY(-6px); }
+.book-cover { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; margin-bottom: 8px; transition: all var(--tr); }
+.book-card:hover .book-cover { filter: brightness(1.1); }
+.book-cover-placeholder { width: 100%; height: 140px; background: rgba(212,168,76,0.15); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 8px; border: 1px solid rgba(212,168,76,0.3); }
+.book-title { font-weight: 600; color: var(--goldl); font-size: 13px; margin-bottom: 6px; text-shadow: 0 0 6px rgba(212,168,76,0.2); }
+.book-author { font-size: 12px; color: var(--ts); font-style: italic; margin-bottom: 8px; }
+.book-rating { font-size: 16px; color: var(--star); filter: drop-shadow(0 0 6px rgba(212,168,76,0.4)); }
+
+.cover-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: var(--rad); margin-top: 8px; border: 1px solid rgba(212,168,76,0.2); box-shadow: 0 0 15px rgba(212,168,76,0.15); }
+
+.empty { text-align: center; padding: 60px 20px; color: var(--ts); font-style: italic; }
+.empty-icon { font-size: 48px; opacity: .3; margin-bottom: 12px; animation: float 3s ease-in-out infinite; }
+
+.notif { position: fixed; bottom: 20px; right: 20px; background: rgba(26,26,26,0.99); border: 2px solid var(--gold); border-radius: var(--rad); padding: 14px 20px; font-family: var(--fh); font-size: 11px; letter-spacing: .1em; color: var(--goldl); box-shadow: var(--shad), var(--glow), 0 0 20px rgba(212,168,76,0.3); transform: translateY(70px); opacity: 0; transition: transform .4s cubic-bezier(.22,.68,0,1.2), opacity .4s; z-index: 1000; max-width: 300px; }
+.notif.on { transform: translateY(0); opacity: 1; }
+
+#import-file-input { display: none; }
+
+@media(max-width:768px) {
+  .brand-title { font-size: 36px; }
+  .brand-subtitle { font-size: 13px; }
+  .topbar { padding: 28px 20px 22px; }
+}
+
+@media(max-width:640px) {
+  .topbar { padding: 72px 14px 16px; }
+  .brand-title { font-size: 26px; }
+  .brand-subtitle { font-size: 11px; margin-top: 8px; }
+  .brand-divider { width: 40px; }
+  .topnav { gap: 2px; margin-bottom: 16px; }
+  .nbtn { padding: 8px 12px; font-size: 9px; }
+  .settings-menu-container { top: 20px; left: 20px; }
+  .settings-btn { padding: 8px 14px; font-size: 10px; letter-spacing: .08em; gap: 6px; }
+  .page { padding: 20px 16px; }
+  .panel { padding: 20px 16px; }
+  .charts-row { grid-template-columns: 1fr; }
+}
+
+@media(max-width:400px) {
+  .brand-title { font-size: 22px; letter-spacing: 0.06em; }
+  .settings-btn-label { display: none; }
+  .settings-btn { padding: 8px; border-radius: 50%; gap: 0; }
+  .settings-btn svg { margin-right: 0 !important; }
+}
+
+.flex-sb { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.mt14 { margin-top: 14px; }
+.ms { font-size: 12px; color: var(--star); filter: drop-shadow(0 0 5px rgba(212,168,76,0.5)); text-shadow: 0 0 4px rgba(212,168,76,0.3); }
+.msp { font-size: 12px; color: var(--spice); filter: drop-shadow(0 0 5px rgba(204,58,85,0.4)); }
+
+/* ═══════════════════════════════════════════════════
+   MAGICAL SPLASH SCREEN
+   ═══════════════════════════════════════════════════ */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+  pointer-events: auto;
+}
+
+#splash-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-stars {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  animation: twinkle-bg 4s ease-in-out infinite;
+}
+
+@keyframes twinkle-bg {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.splash-container {
+  text-align: center;
+  position: relative;
+  z-index: 10000;
+}
+
+.splash-logo {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.splash-logo img,
+.splash-logo svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 30px rgba(212,168,76,0.8)) drop-shadow(0 0 60px rgba(212,168,76,0.5)) drop-shadow(0 0 100px rgba(212,168,76,0.3));
+  animation: splash-float 3s ease-in-out infinite, splash-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes splash-float {
+  0%, 100% { 
+    transform: translateY(0px);
+  }
+  50% { 
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes splash-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 30px rgba(212,168,76,0.8)) drop-shadow(0 0 60px rgba(212,168,76,0.5)) drop-shadow(0 0 100px rgba(212,168,76,0.3));
+  }
+  50% { 
+    filter: drop-shadow(0 0 50px rgba(212,168,76,1)) drop-shadow(0 0 100px rgba(212,168,76,0.8)) drop-shadow(0 0 150px rgba(255,215,0,0.4));
+  }
+}
+
+.splash-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a89968;
+  text-shadow: 0 0 20px rgba(212,168,76,0.5), 0 0 40px rgba(212,168,76,0.3);
+  margin-top: 0;
+  animation: splash-text-in 1s ease-out 0.3s both;
+}
+
+@keyframes splash-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(240,216,120,0.8), rgba(212,168,76,0.4));
+  filter: blur(40px);
+  animation: splash-orbit 8s linear infinite;
+}
+
+.splash-orb-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.splash-orb-2 {
+  width: 250px;
+  height: 250px;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: -4s;
+}
+
+@keyframes splash-orbit {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  25% { opacity: 0.7; }
+  50% { opacity: 0.5; }
+  75% { opacity: 0.7; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+}
+
+</style>
+</head>
+<body data-theme="premium">
+
+<!-- MAGICAL SPLASH SCREEN -->
+<div id="splash-screen">
+  <div class="splash-stars"></div>
+  <div class="splash-orb splash-orb-1"></div>
+  <div class="splash-orb splash-orb-2"></div>
+  <div class="splash-container">
+    <div class="splash-logo">
+      <img id="splash-logo-img" src="https://base44.app/api/apps/69e19bd6330b5bde8cea1577/files/mp/public/69e19bd6330b5bde8cea1577/825c1e688_logo_nobg.png" alt="Inkbound">
+    </div>
+    <p class="splash-subtitle">A Chronicle of Tales Devoured & Worlds Explored</p>
+  </div>
+</div>
+
+
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen active" id="login-screen">
+  <div class="login-box">
+    <div class="login-logo-container">
+      <!-- CUSTOM LOGO: replace CUSTOM_LOGO_URL with your image URL to use your own logo -->
+      <img id="login-logo-img" src="https://base44.app/api/apps/69e19bd6330b5bde8cea1577/files/mp/public/69e19bd6330b5bde8cea1577/825c1e688_logo_nobg.png" alt="Inkbound Logo"
+           onerror="this.style.display='none';document.getElementById('login-logo-svg').style.display='block';"
+           style="width:100%;height:100%;object-fit:contain;display:block;">
+      <svg id="login-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+        <defs>
+          <linearGradient id="bookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffd700"/>
+            <stop offset="50%" stop-color="#ffed4e"/>
+            <stop offset="100%" stop-color="#cc9900"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" fill="#0a0a0a"/>
+        <circle cx="50" cy="50" r="48" fill="none" stroke="#d4a84c" stroke-width="1" opacity="0.5"/>
+        <path d="M35 25L50 20L65 25L65 65Q65 72 50 75Q35 72 35 65Z" fill="#cc9900" stroke="#ffd700" stroke-width="1.5"/>
+        <path d="M50 20L50 75" stroke="#ffd700" stroke-width="2" opacity="0.7"/>
+        <circle cx="42" cy="35" r="2" fill="#ffd700"/>
+        <circle cx="50" cy="35" r="2" fill="#ffd700"/>
+        <circle cx="58" cy="35" r="2" fill="#ffd700"/>
+        <circle cx="42" cy="48" r="2" fill="#ffd700"/>
+        <circle cx="50" cy="48" r="2" fill="#ffd700"/>
+        <circle cx="58" cy="48" r="2" fill="#ffd700"/>
+        <circle cx="42" cy="61" r="2" fill="#ffd700"/>
+        <circle cx="50" cy="61" r="2" fill="#ffd700"/>
+        <circle cx="58" cy="61" r="2" fill="#ffd700"/>
+      </svg>
+    </div>
+    <div class="login-title">Inkbound</div>
+    <div class="login-subtitle">A Chronicle of Tales Devoured & Worlds Explored</div>
+    <div class="login-form" id="login-form">
+      <input type="text" id="login-username" class="login-input" placeholder="Username" autocomplete="off">
+      <input type="password" id="login-password" class="login-input" placeholder="Password">
+      <button class="btn bp" style="width: 100%; justify-content: center;" onclick="login()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Enter the Archive</button>
+      <div style="text-align: center; font-size: 12px; color: var(--ts); margin-top: 12px;">
+        New to Inkbound? <span style="color: var(--goldl); cursor: pointer; font-weight: 600;" onclick="toggleSignup()">Begin your journey</span>
+      </div>
+      <div style="text-align: center; margin-top: 8px;">
+        <span style="color: var(--ts); font-size: 11px; cursor: pointer;" onclick="toggleRecovery()">Forgot password?</span>
+      </div>
+    </div>
+    
+    <!-- Forgot Password Form -->
+    <div id="recovery-form" style="display: none; margin-top: 24px;">
+      <div style="color: var(--goldl); font-family: var(--fh); margin-bottom: 8px; font-size: 13px; text-align: center;">Forgot Password</div>
+      <div style="color: var(--ts); font-size: 11px; text-align: center; margin-bottom: 16px;">Enter your email and we'll send a reset link</div>
+      <input type="email" id="recovery-email" class="login-input" placeholder="Your email address" style="margin-bottom: 12px;">
+      <button class="btn bp" style="width: 100%; justify-content: center;" onclick="sendPasswordReset()">✦ Send Reset Link</button>
+      <button class="btn bg" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="toggleRecovery()">Back to Login</button>
+    </div>
+    <div id="signup-form" style="display: none; margin-top: 24px;">
+      <input type="text" id="signup-username" class="login-input" placeholder="Choose a username" autocomplete="off">
+      <input type="email" id="signup-email" class="login-input" placeholder="Email address" style="margin-top: 12px;">
+      <input type="password" id="signup-password" class="login-input" placeholder="Password" style="margin-top: 12px;">
+      <input type="password" id="signup-confirm" class="login-input" placeholder="Confirm password" style="margin-top: 12px;">
+      <button class="btn bp" style="width: 100%; justify-content: center; margin-top: 16px;" onclick="signup()">✦ Create Account</button>
+      <button class="btn bg" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="toggleSignup()">Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOP NAV - REGAL HEADER -->
+<div class="topbar" id="topbar" style="display: none;">
+  <div class="topbar-glow"></div>
+  <div class="topbar-shimmer"></div>
+  <div class="topbar-stars" id="topbar-stars"></div>
+  <!-- Corner ornaments (SVG) -->
+  <div class="brand-center">
+    <h1 class="brand-title">✦ INKBOUND ✦</h1>
+    <div class="brand-divider"></div>
+    <p class="brand-subtitle">A Chronicle of Tales Devoured & Worlds Explored</p>
+  </div>
+
+  <nav class="topnav">
+    <button class="nbtn on" onclick="nav('overview')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg>Overview</button>
+    <button class="nbtn" onclick="nav('log')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Log</button>
+    <button class="nbtn" onclick="nav('goal')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Goals</button>
+    <button class="nbtn" onclick="nav('reviews')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Reviews</button>
+    <button class="nbtn" onclick="nav('shelf')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Shelf</button>
+    <button class="nbtn" onclick="nav('tracker')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Year</button>
+  </nav>
+
+</div>
+
+<!-- SETTINGS MENU - fixed position, outside topbar so always visible -->
+<div class="settings-menu-container" id="settings-menu-container" style="display:none;">
+    <button class="settings-btn" id="settings-btn" onclick="toggleSettingsMenu()" title="Archive & Settings">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="20" cy="6" r="2" fill="currentColor" stroke="none"/><circle cx="20" cy="18" r="2" fill="currentColor" stroke="none"/></svg>
+</button>
+    <div class="settings-dropdown" id="settings-dropdown">
+      <div class="settings-item" style="flex-direction:column; align-items:flex-start; gap:4px; padding-bottom:14px;">
+        <span style="font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--ts); opacity:0.6;">Signed in as</span>
+        <span id="menu-username" style="font-size:17px; font-family:var(--fh); color:var(--goldl); letter-spacing:.04em; text-shadow:0 0 12px rgba(212,168,76,0.4);">-</span>
+      </div>
+      <div class="settings-item divider">
+        <div style="border-top: 1px solid rgba(212,168,76,0.2); width: 100%;"></div>
+      </div>
+      <button class="menu-btn" onclick="openEditProfile(); closeSettingsMenu()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Edit Profile</button>
+      <button class="menu-btn logout" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<div class="tooltip" id="tip"></div>
+<!-- EDIT PROFILE MODAL -->
+<div class="mover" id="edit-profile-modal" style="display:none; align-items:center; justify-content:center;">
+  <div class="modal" style="max-width:440px; width:100%;">
+    <button class="modal-close" onclick="closeEditProfile()">✕</button>
+    <div class="stitle" style="margin-bottom:20px;">✦ Edit Profile</div>
+    <div class="fg" style="gap:14px;">
+      <div>
+        <label>Username</label>
+        <input type="text" id="ep-username" class="login-input" placeholder="New username" autocomplete="off">
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="email" id="ep-email" class="login-input" placeholder="New email address" autocomplete="off">
+      </div>
+      <div style="border-top:1px solid rgba(212,168,76,0.15); padding-top:14px;">
+        <label style="color:var(--ts); font-size:11px; text-transform:uppercase; letter-spacing:.1em;">Change Password</label>
+        <input type="password" id="ep-new-password" class="login-input" placeholder="New password (leave blank to keep)" style="margin-top:10px;">
+        <input type="password" id="ep-confirm-password" class="login-input" placeholder="Confirm new password" style="margin-top:10px;">
+      </div>
+      <div id="ep-status" style="font-size:12px; color:var(--goldl); text-align:center; min-height:18px;"></div>
+      <div class="brow">
+        <button class="btn bp" onclick="saveProfile()">✦ Save Changes</button>
+        <button class="btn bg" onclick="closeEditProfile()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- OVERVIEW PAGE -->
+<div class="page on" id="page-overview">
+  <div class="panel">
+    <div class="stitle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg>Reading at a Glance</div>
+    <div class="sgrid" id="sgrid"></div>
+  </div>
+  <div class="charts-row">
+    <div class="chart-box">
+      <div class="ctitle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Genres</div>
+      <div class="piewrap"><canvas id="gc" width="140" height="140"></canvas><div class="legwrap" id="gl"></div></div>
+    </div>
+    <div class="chart-box">
+      <div class="ctitle">✦ Ratings</div>
+      <div class="piewrap"><canvas id="rc" width="140" height="140"></canvas><div class="legwrap" id="rl"></div></div>
+    </div>
+    <div class="chart-box">
+      <div class="ctitle">🌶 Spice Levels</div>
+      <div class="piewrap"><canvas id="sc" width="140" height="140"></canvas><div class="legwrap" id="sl"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- LOG PAGE -->
+<div class="page" id="page-log">
+  <div class="panel">
+    <div class="stitle">✨ Add New Entry</div>
+    <div class="fg c2">
+      <div class="fg" style="gap:11px">
+        <div><label>Title</label><input type="text" id="lt" placeholder="Book title"></div>
+        <div><label>Author</label><input type="text" id="la" placeholder="Author name"></div>
+        <div><label>Series</label><input type="text" id="lsr" placeholder="e.g. Book #1"></div>
+      </div>
+      <div class="fg" style="gap:11px">
+        <div><label>Date Started</label><input type="date" id="lds"></div>
+        <div><label>Date Completed</label><input type="date" id="ld"></div>
+        <div><label>Genre</label><input type="text" id="lg" placeholder="Genre"></div>
+        <div class="fg c2" style="gap:10px">
+          <div><label>Format</label>
+            <select id="lf"><option value="Book">Book</option><option value="eBook">eBook</option><option value="Audiobook">Audiobook</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div><label>Book Cover</label><input type="file" id="lcov" accept="image/*"></div>
+    <div id="lcov-preview"></div>
+    <div class="fg c2 mt14">
+      <div><label>Rating</label>
+        <div class="srow" id="rating-stars">
+          <span class="star" data-type="rating" data-val="1">★</span>
+          <span class="star" data-type="rating" data-val="2">★</span>
+          <span class="star" data-type="rating" data-val="3">★</span>
+          <span class="star" data-type="rating" data-val="4">★</span>
+          <span class="star" data-type="rating" data-val="5">★</span>
+        </div>
+      </div>
+      <div><label>Spice Level 🌶</label>
+        <div class="srow" id="spice-stars">
+          <span class="star sp" data-type="spice" data-val="1">🌶</span>
+          <span class="star sp" data-type="spice" data-val="2">🌶</span>
+          <span class="star sp" data-type="spice" data-val="3">🌶</span>
+          <span class="star sp" data-type="spice" data-val="4">🌶</span>
+          <span class="star sp" data-type="spice" data-val="5">🌶</span>
+        </div>
+      </div>
+    </div>
+    <div class="brow">
+      <button class="btn bp" onclick="addLog()">✦ Add Entry</button>
+      <button class="btn bg" onclick="clearLog()">Clear</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="flex-sb" style="margin-bottom:16px">
+      <div class="stitle" style="margin-bottom:0;flex:1"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Your Chronicle</div>
+      <input type="text" id="lq" placeholder="Search..." style="max-width:240px" oninput="renderLog()">
+    </div>
+    <div class="twrap">
+      <table><thead><tr>
+        <th>Started</th><th>Completed</th><th>Title</th><th>Author</th><th>Genre</th><th>Format</th><th>Rating</th><th>Spice</th><th></th>
+      </tr></thead><tbody id="ltb"></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- GOALS PAGE -->
+<div class="page" id="page-goal">
+  <div class="fg c2" style="align-items:start">
+    <div>
+      <div class="panel">
+        <div class="stitle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Main Reading Quest</div>
+        <div class="fg c2">
+          <div><label>Year</label><input type="number" id="gy" placeholder="2026" min="2020" max="2099"></div>
+          <div><label>Books to Read</label><input type="number" id="gc2" placeholder="52" min="1"></div>
+        </div>
+        <div class="brow"><button class="btn bp" onclick="saveGoal()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:5px"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9"/></svg>Pledge Quest</button></div>
+      </div>
+      <div class="panel">
+        <div class="stitle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Quest Progress</div>
+        <div id="gdisplay"><p class="empty" style="padding:20px">No quest pledged yet.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="panel">
+        <div class="stitle">✦ Extra Challenges</div>
+        <div class="fg" style="gap:11px">
+          <div><label>Challenge Title</label><input type="text" id="egt" placeholder="Challenge name"></div>
+          <div><label>Description</label><input type="text" id="egd" placeholder="What you're aiming for"></div>
+          <div class="fg c2" style="gap:10px">
+            <div><label>Type</label>
+              <select id="egtype" onchange="egTypeChange()">
+                <option value="manual">Manual (tick off)</option>
+                <option value="genre">Genre count</option>
+                <option value="series">Series tracker</option>
+                <option value="count">Total book count</option>
+              </select>
+            </div>
+            <div><label>Target</label><input type="number" id="egn" placeholder="e.g. 12" min="1"></div>
+          </div>
+          <div id="eg-gw" style="display:none"><label>Genre</label><input type="text" id="egg" placeholder="Genre name"></div>
+          <div id="eg-sw" style="display:none"><label>Series</label><input type="text" id="egs" placeholder="Series name"></div>
+        </div>
+        <div class="brow"><button class="btn bp" onclick="addEG()">✦ Add Challenge</button></div>
+      </div>
+      <div>
+        <div class="stitle" style="padding:0 2px;margin-bottom:12px">Active Challenges</div>
+        <div class="eg-grid" id="egg-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS PAGE -->
+<div class="page" id="page-reviews">
+  <div class="flex-sb" style="margin-bottom:18px">
+    <input type="text" id="rvq" placeholder="Search reviews..." style="max-width:320px" oninput="renderReviews()">
+    <button class="btn bp" onclick="openRV(null)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Write Review</button>
+  </div>
+  <div id="rvlist"></div>
+</div>
+
+<!-- BOOKSHELF PAGE -->
+<div class="page" id="page-shelf">
+  <div class="panel">
+    <div class="stitle"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:7px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Your Bookshelf</div>
+    <p style="font-size:14px;color:var(--ts);margin-bottom:16px;font-style:italic">Your collection awaits...</p>
+    <div id="shelf-display"></div>
+  </div>
+</div>
+
+<!-- YEAR TRACKER PAGE -->
+<div class="page" id="page-tracker">
+  <div class="panel">
+    <div class="flex-sb" style="margin-bottom:18px">
+      <div class="stitle" style="margin-bottom:0;flex:1">📅 Year in Review</div>
+      <select id="yrsel" onchange="renderTracker()" style="max-width:110px"></select>
+    </div>
+    <div class="hmwrap" id="hmwrap"></div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
+      <span style="font-family:var(--fh);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ts)">Less</span>
+      <div style="display:flex;gap:3px">
+        <div class="hm-cell" style="cursor:default"></div>
+        <div class="hm-cell l1" style="cursor:default"></div>
+        <div class="hm-cell l2" style="cursor:default"></div>
+        <div class="hm-cell l3" style="cursor:default"></div>
+        <div class="hm-cell l4" style="cursor:default"></div>
+      </div>
+      <span style="font-family:var(--fh);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ts)">More</span>
+    </div>
+    <div class="yr-stats" id="yrstats"></div>
+    <hr>
+    <div class="stitle" style="margin-top:6px">✎ Log Reading Day</div>
+    <div class="fg c3" style="gap:12px">
+      <div><label>Date</label><input type="date" id="rdd"></div>
+      <div><label>Pages</label><input type="number" id="rdv" placeholder="50" min="1"></div>
+      <div><label>Note</label><input type="text" id="rdn" placeholder="Optional note"></div>
+    </div>
+    <div class="brow"><button class="btn bp" onclick="addRD()">✦ Log Day</button></div>
+  </div>
+</div>
+
+<!-- REVIEW MODAL -->
+<div class="mover" id="rvmodal">
+  <div class="modal">
+    <button class="mclose" onclick="closeRV()">✕</button>
+    <div class="mtitle" id="rvmtitle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Write a Review</div>
+    <div class="fg c2">
+      <div><label>Title</label><input type="text" id="rvt" placeholder="Book title"></div>
+      <div><label>Author</label><input type="text" id="rva" placeholder="Author"></div>
+      <div><label>Series</label><input type="text" id="rvsr" placeholder="Series"></div>
+      <div><label>Date</label><input type="date" id="rvd"></div>
+      <div><label>Genre</label><input type="text" id="rvg" placeholder="Genre"></div>
+      <div><label>Format</label>
+        <select id="rvf"><option value="Book">Book</option><option value="eBook">eBook</option><option value="Audiobook">Audiobook</option></select>
+      </div>
+    </div>
+    <div><label>Cover</label><input type="file" id="rvcov" accept="image/*"></div>
+    <div id="rvcov-preview"></div>
+    <hr>
+    <div class="fg c2" style="gap:13px">
+      <div><label>Rating</label><div class="srow" id="rv-r">
+        <span class="star" data-type="rv-rating" data-val="1">★</span>
+        <span class="star" data-type="rv-rating" data-val="2">★</span>
+        <span class="star" data-type="rv-rating" data-val="3">★</span>
+        <span class="star" data-type="rv-rating" data-val="4">★</span>
+        <span class="star" data-type="rv-rating" data-val="5">★</span>
+      </div></div>
+      <div><label>Spice 🌶</label><div class="srow" id="rv-s">
+        <span class="star sp" data-type="rv-spice" data-val="1">🌶</span>
+        <span class="star sp" data-type="rv-spice" data-val="2">🌶</span>
+        <span class="star sp" data-type="rv-spice" data-val="3">🌶</span>
+        <span class="star sp" data-type="rv-spice" data-val="4">🌶</span>
+        <span class="star sp" data-type="rv-spice" data-val="5">🌶</span>
+      </div></div>
+    </div>
+    <hr>
+    <label>Your Thoughts</label>
+    <textarea id="rvth" rows="8" placeholder="Share your thoughts..."></textarea>
+    <input type="hidden" id="rveid">
+    <div class="brow">
+      <button class="btn bp" onclick="saveRV()">✦ Seal Review</button>
+      <button class="btn bg" onclick="closeRV()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ═══════════════════════════════════════
+//  SUPABASE CONFIG
+// ═══════════════════════════════════════
+const SUPABASE_URL = 'https://ektwcqzowulqvsaxgacl.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVrdHdjcXpvd3VscXZzYXhnYWNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3NDMxNTgsImV4cCI6MjA5MjMxOTE1OH0.TegduGrb27-3hPVERMNQb3a5ngm-0wkguG-ruBOCmIA';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const THEME_KEY = 'inkbound_theme';
+const SPICE_PAL = ['#e8c4a0','#d4956a','#c06040','#a03020','#7a1010'];
+const PD = ['#d4a84c','#f0d878','#c87941','#ffd700','#e6a020','#b8860b','#f5c842','#e8901a'];
+
+let currentUser = null;  // supabase user object
+let currentProfile = {}; // username, etc.
+let D = { log: [], reviews: [], goal: null, extraGoals: [], readDays: {} };
+let saveTimeout = null;
+
+// ─── THEME ───────────────────────────────
+let theme = localStorage.getItem(THEME_KEY) || 'premium';
+function updateThemeDisplay() {
+  const sel = document.getElementById('theme-select');
+  if (sel) sel.value = theme;
+}
+
+// ─── SUPABASE DATA LOAD/SAVE ─────────────
+async function loadData() {
+  if (!currentUser) return;
+  const { data, error } = await sb
+    .from('reading_data')
+    .select('data')
+    .eq('user_id', currentUser.id)
+    .single();
+  if (error && error.code !== 'PGRST116') {
+    console.error('Load error:', error);
+    return;
+  }
+  if (data?.data) {
+    D = data.data;
+    if (!D.readDays) D.readDays = {};
+    if (!D.log) D.log = [];
+    if (!D.reviews) D.reviews = [];
+    if (!D.extraGoals) D.extraGoals = [];
+  }
+}
+
+async function saveData() {
+  if (!currentUser) return;
+  if (!D.readDays) D.readDays = {};
+  const { error } = await sb
+    .from('reading_data')
+    .upsert({
+      user_id: currentUser.id,
+      data: D,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id' });
+  if (error) console.error('Save error:', error);
+}
+
+// Debounced save — prevents hammering Supabase on every keystroke
+function scheduleSave() {
+  if (saveTimeout) clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(() => saveData(), 800);
+}
+
+// ─── AUTH HELPERS ─────────────────────────
+async function getProfile(userId) {
+  const { data } = await sb
+    .from('profiles')
+    .select('username')
+    .eq('id', userId)
+    .single();
+  return data || {};
+}
+
+// ─── SIGN UP ──────────────────────────────
+async function signup() {
+  const username = document.getElementById('signup-username').value.trim();
+  const email    = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+  const confirm  = document.getElementById('signup-confirm').value;
+  if (!username || !email || !password) { notify('Please fill in all fields.'); return; }
+  if (password !== confirm) { notify('Passwords do not match.'); return; }
+  if (password.length < 6) { notify('Password must be 6+ characters.'); return; }
+
+  const { data, error } = await sb.auth.signUp({
+    email,
+    password,
+    options: { data: { username } }
+  });
+  if (error) { notify('❌ ' + error.message); return; }
+  notify('✦ Account created! Check your email to confirm.');
+  toggleSignup();
+}
+
+// ─── LOGIN ────────────────────────────────
+async function login() {
+  const emailOrUser = document.getElementById('login-username').value.trim();
+  const password    = document.getElementById('login-password').value;
+  if (!emailOrUser || !password) { notify('Enter credentials.'); return; }
+
+  // Accept email OR username — try email first
+  let email = emailOrUser;
+  if (!emailOrUser.includes('@')) {
+    // Look up email by username via profiles table
+    const { data: profile, error: pe } = await sb
+      .from('profiles')
+      .select('email')
+      .eq('username', emailOrUser)
+      .single();
+    if (pe || !profile) { notify('Username not found.'); return; }
+    email = profile.email;
+  }
+
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) { notify('❌ ' + error.message); return; }
+  // Session handling done in onAuthStateChange
+}
+
+// ─── LOGOUT ──────────────────────────────
+async function logout() {
+  if (!confirm('Log out?')) return;
+  await sb.auth.signOut();
+  currentUser = null;
+  currentProfile = {};
+  D = { log: [], reviews: [], goal: null, extraGoals: [], readDays: {} };
+  document.getElementById('login-screen').classList.add('active');
+  document.getElementById('topbar').style.display = 'none';
+  document.getElementById('settings-menu-container').style.display = 'none';
+  document.getElementById('login-username').value = '';
+  document.getElementById('login-password').value = '';
+  document.getElementById('signup-form').style.display = 'none';
+  document.getElementById('recovery-form').style.display = 'none';
+  closeSettingsMenu();
+  notify('Logged out.');
+}
+
+// ─── FORGOT PASSWORD ──────────────────────
+async function sendPasswordReset() {
+  const email = document.getElementById('recovery-email').value.trim();
+  if (!email) { notify('Enter your email.'); return; }
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.href
+  });
+  if (error) { notify('❌ ' + error.message); return; }
+  notify('✦ Reset link sent! Check your email.');
+  toggleRecovery();
+}
+
+// ─── EDIT PROFILE ────────────────────────
+function openEditProfile() {
+  const modal = document.getElementById('edit-profile-modal');
+  modal.style.display = 'flex';
+  document.getElementById('ep-username').value = currentProfile.username || '';
+  document.getElementById('ep-email').value = currentUser?.email || '';
+  document.getElementById('ep-new-password').value = '';
+  document.getElementById('ep-confirm-password').value = '';
+  document.getElementById('ep-status').textContent = '';
+}
+
+function closeEditProfile() {
+  document.getElementById('edit-profile-modal').style.display = 'none';
+}
+
+async function saveProfile() {
+  const statusEl = document.getElementById('ep-status');
+  statusEl.textContent = 'Saving...';
+  const newUsername = document.getElementById('ep-username').value.trim();
+  const newEmail    = document.getElementById('ep-email').value.trim();
+  const newPass     = document.getElementById('ep-new-password').value;
+  const confPass    = document.getElementById('ep-confirm-password').value;
+
+  if (newPass && newPass !== confPass) {
+    statusEl.textContent = 'Passwords do not match.';
+    return;
+  }
+  if (newPass && newPass.length < 6) {
+    statusEl.textContent = 'Password must be 6+ characters.';
+    return;
+  }
+
+  // Update auth email/password if changed
+  const authUpdate = {};
+  if (newEmail && newEmail !== currentUser.email) authUpdate.email = newEmail;
+  if (newPass) authUpdate.password = newPass;
+  if (Object.keys(authUpdate).length > 0) {
+    const { error } = await sb.auth.updateUser(authUpdate);
+    if (error) { statusEl.textContent = '❌ ' + error.message; return; }
+  }
+
+  // Update username in profiles table
+  if (newUsername && newUsername !== currentProfile.username) {
+    const { error } = await sb
+      .from('profiles')
+      .upsert({ id: currentUser.id, username: newUsername, email: newEmail || currentUser.email }, { onConflict: 'id' });
+    if (error) { statusEl.textContent = '❌ ' + error.message; return; }
+    currentProfile.username = newUsername;
+    document.getElementById('menu-username').textContent = newUsername;
+  }
+
+  statusEl.textContent = '✦ Saved!';
+  setTimeout(() => closeEditProfile(), 1200);
+  notify('✦ Profile updated!');
+}
+
+// ─── TOGGLE UI PANELS ────────────────────
+function toggleSignup() {
+  const sf = document.getElementById('signup-form');
+  const lf = document.getElementById('login-form');
+  const rf = document.getElementById('recovery-form');
+  const show = sf.style.display === 'none';
+  sf.style.display = show ? 'block' : 'none';
+  if (lf) lf.style.display = show ? 'none' : 'block';
+  if (rf) rf.style.display = 'none';
+}
+
+function toggleRecovery() {
+  const rf = document.getElementById('recovery-form');
+  const sf = document.getElementById('signup-form');
+  const show = rf.style.display === 'none';
+  rf.style.display = show ? 'block' : 'none';
+  sf.style.display = 'none';
+}
+
+// ─── SESSION RESTORE ─────────────────────
+async function onLogin(user) {
+  currentUser = user;
+  currentProfile = await getProfile(user.id) || {};
+  await loadData();
+  document.getElementById('login-screen').classList.remove('active');
+  document.getElementById('topbar').style.display = 'flex';
+  document.getElementById('settings-menu-container').style.display = 'flex';
+  document.getElementById('menu-username').textContent = currentProfile.username || user.email;
+  updateThemeDisplay();
+  document.body.dataset.theme = theme;
+  initStars();
+  handleFileUpload('lcov', 'lcov-preview');
+  handleFileUpload('rvcov', 'rvcov-preview');
+  renderOverview(); renderLog(); renderShelf(); renderGoal(); renderEG(); renderTracker(); renderReviews();
+  notify(`✦ Welcome, ${currentProfile.username || user.email}`);
+}
+
+// ─── AUTH STATE CHANGE ────────────────────
+sb.auth.onAuthStateChange(async (event, session) => {
+  if (event === 'SIGNED_IN' && session?.user) {
+    await onLogin(session.user);
+  } else if (event === 'SIGNED_OUT') {
+    // already handled in logout()
+  } else if (event === 'PASSWORD_RECOVERY') {
+    // User clicked reset link — show password reset UI
+    notify('✦ Enter your new password below.');
+    openEditProfile();
+  }
+});
+
+// ─── INIT ─────────────────────────────────
+window.addEventListener('DOMContentLoaded', async () => {
+  document.body.dataset.theme = theme;
+  // Check for existing session
+  const { data: { session } } = await sb.auth.getSession();
+  if (session?.user) {
+    await onLogin(session.user);
+  }
+});
+
+// ─── STUBS for removed features ──────────
+function showAllAccounts() {}
+function resetPassword() {}
+function triggerImport() {}
+function exportData() {}
+
+</script>
+<script>
+
+function handleFileUpload(inputId, previewId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+  input.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        preview.innerHTML = `<img src="${event.target.result}" class="cover-preview" alt="Cover">`;
+        input.dataset.imageData = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function initStars() {
+  document.querySelectorAll('.star').forEach(star => {
+    star.removeEventListener('click', handleStarClick);
+    star.addEventListener('click', handleStarClick);
+  });
+}
+
+function handleStarClick(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const type = this.dataset.type;
+  const val = parseInt(this.dataset.val);
+  const parent = this.closest('.srow');
+  parent.querySelectorAll('.star').forEach(s => {
+    const sVal = parseInt(s.dataset.val);
+    if (sVal <= val) s.classList.add('on'); else s.classList.remove('on');
+  });
+  ratings[type] = val;
+}
+
+
+
+function toggleSettingsMenu() {
+  const dropdown = document.getElementById('settings-dropdown');
+  const btn = document.getElementById('settings-btn');
+  dropdown.classList.toggle('active');
+  btn.classList.toggle('active');
+}
+
+function closeSettingsMenu() {
+  const dropdown = document.getElementById('settings-dropdown');
+  const btn = document.getElementById('settings-btn');
+  dropdown.classList.remove('active');
+  btn.classList.remove('active');
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(e) {
+  const container = document.querySelector('.settings-menu-container');
+  if (container && !container.contains(e.target)) {
+    closeSettingsMenu();
+  }
+});
+
+function cycleTheme() {}
+
+function updateThemeDisplay() { document.body.dataset.theme = 'premium'; }
+
+function exportData() {
+  if (!currentUser) { notify('Not logged in.'); return; }
+  const exportObj = { username: currentUser, exportDate: new Date().toISOString(), data: D };
+  const dataStr = JSON.stringify(exportObj, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  const timestamp = new Date().toISOString().split('T')[0];
+  link.href = url;
+  link.download = `inkbound_${currentUser}_${timestamp}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+  notify('✦ Archive downloaded');
+}
+
+function triggerImport() { document.getElementById('import-file-input').click(); }
+
+document.getElementById('import-file-input').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const importObj = JSON.parse(event.target.result);
+      if (!importObj.data || !importObj.username) { notify('❌ Invalid backup file.'); return; }
+      if (importObj.username !== currentUser && !confirm(`Backup is for "${importObj.username}". Import anyway?`)) return;
+      if (!importObj.data.log) importObj.data.log = [];
+      if (!importObj.data.reviews) importObj.data.reviews = [];
+      if (!importObj.data.readDays) importObj.data.readDays = {};
+      D = importObj.data;
+      saveData();
+      renderOverview(); renderLog(); renderShelf(); renderGoal(); renderEG(); renderTracker();
+      notify(`✦ Archive restored`);
+    } catch(err) { notify('❌ Error reading file'); console.error(err); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function toggleSignup() {
+  const form = document.getElementById('signup-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+
+
+function handleFileUpload(inputId, previewId) {
+  const input = document.getElementById(inputId);
+  const preview = document.getElementById(previewId);
+  input.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        preview.innerHTML = `<img src="${event.target.result}" class="cover-preview" alt="Cover">`;
+        input.dataset.imageData = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+function initStars() {
+  document.querySelectorAll('.star').forEach(star => {
+    star.removeEventListener('click', handleStarClick);
+    star.addEventListener('click', handleStarClick);
+  });
+}
+
+function handleStarClick(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const type = this.dataset.type;
+  const val = parseInt(this.dataset.val);
+  const parent = this.closest('.srow');
+  parent.querySelectorAll('.star').forEach(s => {
+    const sVal = parseInt(s.dataset.val);
+    if (sVal <= val) s.classList.add('on'); else s.classList.remove('on');
+  });
+  ratings[type] = val;
+}
+
+
+function addLog() {
+  const t = document.getElementById('lt').value.trim();
+  if (!t) { notify('Enter a title.'); return; }
+  const entry = {
+    id: Date.now(), title: t, author: getId('la'), series: getId('lsr'), genre: getId('lg'),
+    format: document.getElementById('lf').value, dateStarted: getId('lds') || null, date: getId('ld') || null,
+    rating: ratings.rating, spice: ratings.spice, cover: document.getElementById('lcov').dataset.imageData || null,
+  };
+  D.log.unshift(entry);
+  if (entry.date) D.readDays[entry.date] = { value: 1, note: 'Book completed' };
+  saveData();
+  clearLog();
+  renderLog(); renderOverview(); renderShelf(); renderTracker();
+  notify('✦ Entry added');
+}
+
+function clearLog() {
+  ['lt', 'la', 'lsr', 'lg', 'lds', 'ld'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('lf').value = 'Book';
+  document.getElementById('lcov').value = '';
+  document.getElementById('lcov').dataset.imageData = '';
+  document.getElementById('lcov-preview').innerHTML = '';
+  ratings.rating = 0;
+  ratings.spice = 0;
+  document.getElementById('rating-stars').querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+  document.getElementById('spice-stars').querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+}
+
+function delLog(id) {
+  if (!confirm('Remove?')) return;
+  D.log = D.log.filter(e => e.id !== id);
+  saveData();
+  renderLog(); renderOverview(); renderShelf(); renderTracker();
+  notify('Entry removed.');
+}
+
+function renderLog() {
+  const q = (document.getElementById('lq')?.value || '').toLowerCase();
+  let rows = D.log;
+  if (q) rows = rows.filter(e => (e.title + e.author + e.genre + e.series + e.format).toLowerCase().includes(q));
+  const tb = document.getElementById('ltb');
+  if (!rows.length) { tb.innerHTML = `<tr><td colspan="10"><div class="empty"><div class="empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M10 7v8" stroke="currentColor" stroke-width="1"/></svg></div>No entries.</div></td></tr>`; return; }
+  tb.innerHTML = rows.map(e => `
+    <tr>
+      <td style="font-size:12px;color:var(--ts);white-space:nowrap">${e.dateStarted || '—'}</td>
+      <td style="font-size:12px;color:var(--ts);white-space:nowrap">${e.date || '—'}</td>
+      <td style="font-weight:600;color:var(--goldl)">${esc(e.title)}</td>
+      <td style="color:var(--ts);font-style:italic">${esc(e.author) || '—'}</td>
+      <td style="font-size:13px;color:var(--ts)">${esc(e.series) || '—'}</td>
+      <td style="color:var(--ts)">${esc(e.genre) || '—'}</td>
+      <td><span class="badge">${e.format}</span></td>
+      <td><span class="ms">${'★'.repeat(e.rating)}</span></td>
+      <td><span class="msp">${'🌶'.repeat(e.spice)}</span></td>
+      <td style="display:flex;gap:4px"><button class="btn bp bsm" title="Write review for this book" onclick="quickReviewFromLog(${e.id})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><button class="btn bd bsm" onclick="delLog(${e.id})">✕</button></td>
+    </tr>`).join('');
+}
+
+function saveGoal() {
+  const year = parseInt(document.getElementById('gy').value);
+  const count = parseInt(document.getElementById('gc2').value);
+  if (!year || !count || count < 1) { notify('Enter valid year and count.'); return; }
+  D.goal = { year, count };
+  saveData();
+  renderGoal();
+  renderOverview();
+  notify('✦ Quest pledged!');
+}
+
+function renderGoal() {
+  if (D.goal) {
+    document.getElementById('gy').value = D.goal.year;
+    document.getElementById('gc2').value = D.goal.count;
+  }
+  const el = document.getElementById('gdisplay');
+  if (!D.goal) { el.innerHTML = '<p class="empty" style="padding:20px">No quest pledged yet.</p>'; return; }
+  const { year, count } = D.goal;
+  const read = D.log.filter(e => e.date?.startsWith(year)).length;
+  const pct = Math.min(100, Math.round((read / count) * 100));
+  const R2 = 52, C = 2 * Math.PI * R2, Df = C * (pct / 100);
+  el.innerHTML = `
+    <div class="ring-outer">
+      <div class="ring-wrap">
+        <svg width="130" height="130" viewBox="0 0 130 130">
+          <circle cx="65" cy="65" r="${R2}" fill="none" stroke="rgba(212,168,76,0.2)" stroke-width="10"/>
+          <circle cx="65" cy="65" r="${R2}" fill="none" stroke="url(#gg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${Df} ${C}"/>
+          <defs><linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--gold)"/><stop offset="100%" stop-color="var(--goldl)"/></linearGradient></defs>
+        </svg>
+        <div class="ring-ctr"><div class="ring-pct">${pct}%</div><div class="ring-lbl">Complete</div></div>
+      </div>
+      <div style="flex:1">
+        <div style="font-family:var(--fh);font-size:16px;color:var(--th)">${year} Reading Quest</div>
+        <div style="font-family:var(--fh);font-size:13px;color:var(--ts);margin-top:8px">
+          Read <strong style="font-size:22px;color:var(--goldl)">${read}</strong> of <strong style="font-size:22px;color:var(--goldl)">${count}</strong>
+        </div>
+        <div class="gbar-wrap"><div class="gbar" style="width:${pct}%"></div></div>
+        <div style="font-size:13px;color:var(--ts);font-family:var(--fh);margin-top:8px">
+          ${pct >= 100 ? '✦ Quest complete!' : `${count - read} remaining`}
+        </div>
+      </div>
+    </div>`;
+}
+
+function egTypeChange() {
+  const t = document.getElementById('egtype').value;
+  document.getElementById('eg-gw').style.display = t === 'genre' ? '' : 'none';
+  document.getElementById('eg-sw').style.display = t === 'series' ? '' : 'none';
+}
+
+function addEG() {
+  const title = document.getElementById('egt').value.trim();
+  if (!title) { notify('Enter title.'); return; }
+  const eg = {
+    id: Date.now(), title: title, desc: getId('egd'), type: document.getElementById('egtype').value,
+    target: parseInt(document.getElementById('egn').value) || null, genre: getId('egg') || null, series: getId('egs') || null, done: false,
+  };
+  D.extraGoals.unshift(eg);
+  saveData();
+  ['egt', 'egd', 'egn', 'egg', 'egs'].forEach(id => document.getElementById(id).value = '');
+  renderEG();
+  notify('✦ Challenge added');
+}
+
+function toggleEG(id) {
+  const eg = D.extraGoals.find(e => e.id === id);
+  if (eg) { eg.done = !eg.done; saveData(); renderEG(); }
+}
+
+function delEG(id) {
+  D.extraGoals = D.extraGoals.filter(e => e.id !== id);
+  saveData();
+  renderEG();
+}
+
+function egProg(eg) {
+  if (eg.type === 'genre' && eg.genre) {
+    const n = D.log.filter(e => e.genre?.toLowerCase().includes(eg.genre.toLowerCase())).length;
+    return { curr: n, target: eg.target || 10 };
+  }
+  if (eg.type === 'series' && eg.series) {
+    const n = D.log.filter(e => e.series?.toLowerCase().includes(eg.series.toLowerCase())).length;
+    return { curr: n, target: eg.target || 5 };
+  }
+  if (eg.type === 'count') return { curr: D.log.length, target: eg.target || 20 };
+  return null;
+}
+
+function renderEG() {
+  const grid = document.getElementById('egg-grid');
+  if (!D.extraGoals.length) { grid.innerHTML = '<div style="color:var(--ts);font-style:italic;font-size:14px;">No challenges yet.</div>'; return; }
+  grid.innerHTML = D.extraGoals.map(eg => {
+    const prog = egProg(eg);
+    const pct = prog ? Math.min(100, Math.round((prog.curr / prog.target) * 100)) : null;
+    return `<div class="eg-card">
+      <button class="eg-del" onclick="delEG(${eg.id})">✕</button>
+      <div class="egt">${esc(eg.title)}${eg.done ? ' ✅' : ''}</div>
+      ${eg.desc ? `<div class="egd">${esc(eg.desc)}</div>` : ''}
+      ${prog ? `<div class="egp">${prog.curr} / ${prog.target}</div><div class="egbw"><div class="egbar" style="width:${pct}%"></div></div><div style="font-family:var(--fh);font-size:10px;color:var(--ts);margin-top:4px">${pct}%</div>` : ''}
+      ${eg.type === 'manual' ? `<div style="margin-top:10px"><button class="btn bg bsm" onclick="toggleEG(${eg.id})">${eg.done ? '↩ Undo' : '✓ Done'}</button></div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function openRV(id) {
+  if (id === null) {
+    document.getElementById('rvmtitle').innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Write a Review';
+    ['rvt', 'rva', 'rvsr', 'rvd', 'rvg', 'rvth'].forEach(f => document.getElementById(f).value = '');
+    document.getElementById('rvf').value = 'Book';
+    document.getElementById('rveid').value = '';
+    document.getElementById('rvcov').value = '';
+    document.getElementById('rvcov').dataset.imageData = '';
+    document.getElementById('rvcov-preview').innerHTML = '';
+    document.getElementById('rv-r').querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+    document.getElementById('rv-s').querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+  } else {
+    const rv = D.reviews.find(r => r.id === id);
+    if (!rv) return;
+    document.getElementById('rvmtitle').innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit Review';
+    document.getElementById('rvt').value = rv.title || '';
+    document.getElementById('rva').value = rv.author || '';
+    document.getElementById('rvsr').value = rv.series || '';
+    document.getElementById('rvd').value = rv.date || '';
+    document.getElementById('rvg').value = rv.genre || '';
+    document.getElementById('rvf').value = rv.format || 'Book';
+    document.getElementById('rvth').value = rv.thoughts || '';
+    document.getElementById('rveid').value = rv.id;
+    if (rv.cover) {
+      document.getElementById('rvcov').dataset.imageData = rv.cover;
+      document.getElementById('rvcov-preview').innerHTML = `<img src="${rv.cover}" class="cover-preview" alt="Cover">`;
+    }
+    if (rv.rating) updateStarGroup('rv-r', rv.rating);
+    if (rv.spice) updateStarGroup('rv-s', rv.spice);
+  }
+  document.getElementById('rvmodal').classList.add('on');
+}
+
+function updateStarGroup(groupId, val) {
+  document.getElementById(groupId).querySelectorAll('.star').forEach(s => {
+    const sVal = parseInt(s.dataset.val);
+    if (sVal <= val) s.classList.add('on'); else s.classList.remove('on');
+  });
+}
+
+function closeRV() { document.getElementById('rvmodal').classList.remove('on'); }
+
+function saveRV() {
+  const title = document.getElementById('rvt').value.trim();
+  if (!title) { notify('Enter title.'); return; }
+  const eid = document.getElementById('rveid').value;
+  const rating = Array.from(document.getElementById('rv-r').querySelectorAll('.star.on')).length;
+  const spice = Array.from(document.getElementById('rv-s').querySelectorAll('.star.on')).length;
+  const rv = {
+    id: eid ? parseInt(eid) : Date.now(), title: title, author: getId('rva'), series: getId('rvsr'), genre: getId('rvg'),
+    format: document.getElementById('rvf').value, date: getId('rvd') || null, rating: rating, spice: spice, thoughts: getId('rvth'), cover: document.getElementById('rvcov').dataset.imageData || null,
+  };
+  if (eid) {
+    const i = D.reviews.findIndex(r => r.id === rv.id);
+    if (i !== -1) D.reviews[i] = rv;
+  } else {
+    D.reviews.unshift(rv);
+  }
+  saveData();
+  closeRV();
+  renderReviews();
+  renderShelf();
+  notify('✦ Review sealed');
+}
+
+function quickReviewFromLog(logId) {
+  const logEntry = D.log.find(e => e.id === logId);
+  if (!logEntry) return;
+  
+  // Check if review already exists for this book
+  let existingReview = D.reviews.find(r => r.title.toLowerCase() === logEntry.title.toLowerCase());
+  
+  document.getElementById('rvmtitle').innerHTML = existingReview ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Edit Review' : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>Write a Review';
+  
+  // Prefill the form with log data
+  document.getElementById('rvt').value = logEntry.title || '';
+  document.getElementById('rva').value = logEntry.author || '';
+  document.getElementById('rvsr').value = logEntry.series || '';
+  document.getElementById('rvd').value = logEntry.date || '';
+  document.getElementById('rvg').value = logEntry.genre || '';
+  document.getElementById('rvf').value = logEntry.format || 'Book';
+  
+  if (existingReview) {
+    document.getElementById('rveid').value = existingReview.id;
+    document.getElementById('rvth').value = existingReview.thoughts || '';
+    if (existingReview.cover) {
+      document.getElementById('rvcov').dataset.imageData = existingReview.cover;
+      document.getElementById('rvcov-preview').innerHTML = `<img src="${existingReview.cover}" class="cover-preview" alt="Cover">`;
+    }
+    if (existingReview.rating) updateStarGroup('rv-r', existingReview.rating);
+    if (existingReview.spice) updateStarGroup('rv-s', existingReview.spice);
+  } else {
+    document.getElementById('rveid').value = '';
+    document.getElementById('rvth').value = '';
+    document.getElementById('rvcov').value = '';
+    document.getElementById('rvcov').dataset.imageData = '';
+    document.getElementById('rvcov-preview').innerHTML = '';
+    document.getElementById('rv-r').querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+    document.getElementById('rv-s').querySelectorAll('.star').forEach(s => s.classList.remove('on'));
+  }
+  
+  document.getElementById('rvmodal').classList.add('on');
+  notify('✦ Prefilled from your log');
+}
+
+
+function delRV(id) {
+  if (!confirm('Remove?')) return;
+  D.reviews = D.reviews.filter(r => r.id !== id);
+  saveData();
+  renderReviews();
+  renderShelf();
+  notify('Review removed.');
+}
+
+function renderReviews() {
+  const q = (document.getElementById('rvq')?.value || '').toLowerCase();
+  let list = D.reviews;
+  if (q) list = list.filter(r => (r.title + r.author + r.genre + (r.thoughts || '')).toLowerCase().includes(q));
+  const el = document.getElementById('rvlist');
+  if (!list.length) { el.innerHTML = `<div class="empty"><div class="empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>${q ? 'No match' : 'No reviews'}</div>`; return; }
+  el.innerHTML = list.map(r => `
+    <div style="background: linear-gradient(135deg, rgba(37,37,37,0.9) 0%, rgba(26,26,26,0.9) 100%); border: 1px solid var(--brd); border-radius: var(--rad); padding: 18px; margin-bottom: 14px; box-shadow: 0 0 12px rgba(212,168,76,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: start; gap: 14px;">
+        ${r.cover ? `<img src="${r.cover}" style="width: 70px; height: 100px; border-radius: 4px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--brd); box-shadow: 0 0 10px rgba(212,168,76,0.15);">` : '<div style="width: 70px; height: 100px; background: rgba(212,168,76,0.15); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(212,168,76,0.25);"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(212,168,76,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M10 7v8"/></svg></div>'}
+        <div style="flex: 1;">
+          <div style="font-family: var(--fh); font-size: 16px; color: var(--goldl); margin-bottom: 4px; text-shadow: 0 0 6px rgba(212,168,76,0.2);">${esc(r.title)}</div>
+          <div style="font-size: 13px; color: var(--ts); font-style: italic;">by ${esc(r.author) || 'Unknown'}</div>
+          <div style="margin-top: 10px; display: flex; gap: 10px; align-items: center;">
+            <span class="ms">${'★'.repeat(r.rating)}</span>
+            <span class="msp">${'🌶'.repeat(r.spice)}</span>
+            ${r.date ? `<span style="font-size: 12px; color: var(--ts);">${r.date}</span>` : ''}
+          </div>
+          ${r.thoughts ? `<div style="margin-top: 10px; font-size: 13px; color: var(--ts);">"${esc(r.thoughts.substring(0, 80))}"</div>` : ''}
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn bg bsm" title="Edit review" onclick="openRV(${r.id})"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
+          <button class="btn bd bsm" onclick="delRV(${r.id})">✕</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function pal() { return PD; }
+function holeColor() { return '#0a0a0a'; }
+
+function renderOverview() {
+  const log = D.log, n = log.length;
+  const avg = n ? (log.reduce((s, e) => s + (e.rating || 0), 0) / n).toFixed(1) : '—';
+  document.getElementById('sgrid').innerHTML = `
+    <div class="scard"><div class="snum">${n}</div><div class="slbl">Books Read</div></div>
+    <div class="scard"><div class="snum">${log.filter(e => e.format === 'Book').length}</div><div class="slbl">Physical</div></div>
+    <div class="scard"><div class="snum">${log.filter(e => e.format === 'eBook').length}</div><div class="slbl">eBooks</div></div>
+    <div class="scard"><div class="snum">${avg}</div><div class="slbl">Avg Rating</div></div>
+  `;
+  const p = pal();
+  const gMap = {};
+  log.forEach(e => { if (e.genre) { const g = e.genre.trim(); gMap[g] = (gMap[g] || 0) + 1; } });
+  pie('gc', 'gl', gMap, p);
+  const rMap = {};
+  for (let i = 1; i <= 5; i++) { const n2 = log.filter(e => e.rating === i).length; if (n2) rMap[i + '★'] = n2; }
+  pie('rc', 'rl', rMap, p);
+  const sMap = {};
+  for (let i = 1; i <= 5; i++) { const n3 = log.filter(e => e.spice === i).length; if (n3) sMap[i + ' 🌶'] = n3; }
+  pie('sc', 'sl', sMap, SPICE_PAL);
+}
+
+function pie(cid, lid, data, p) {
+  const cv = document.getElementById(cid), leg = document.getElementById(lid);
+  if (!cv || !leg) return;
+  const ctx = cv.getContext('2d');
+  const W = 160, R = 66, IR = 32, CX = W/2, CY = W/2;
+  cv.width = W; cv.height = W;
+  ctx.clearRect(0, 0, W, W);
+  const en = Object.entries(data), tot = en.reduce((s, [, v]) => s + v, 0);
+  if (!en.length) {
+    ctx.beginPath();
+    ctx.arc(CX, CY, R, 0, Math.PI * 2);
+    const emptyGrad = ctx.createRadialGradient(CX, CY, IR, CX, CY, R);
+    emptyGrad.addColorStop(0, 'rgba(212,168,76,0.04)');
+    emptyGrad.addColorStop(1, 'rgba(212,168,76,0.1)');
+    ctx.fillStyle = emptyGrad;
+    ctx.fill();
+    leg.innerHTML = '<div class="legitem" style="font-style:italic;opacity:0.5;font-size:12px">No data yet</div>';
+    return;
+  }
+  // Draw segments with thin separators
+  let st = -Math.PI / 2;
+  const gap = 0.025;
+  en.forEach(([, val], i) => {
+    const sl = (val / tot) * 2 * Math.PI;
+    if (sl < 0.001) { st += sl; return; }
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    ctx.arc(CX, CY, R, st + gap/2, st + sl - gap/2);
+    ctx.closePath();
+    // Subtle gradient fill per segment
+    const midAngle = st + sl/2;
+    const gx1 = CX + (R * 0.3) * Math.cos(midAngle);
+    const gy1 = CY + (R * 0.3) * Math.sin(midAngle);
+    const gx2 = CX + R * Math.cos(midAngle);
+    const gy2 = CY + R * Math.sin(midAngle);
+    const grad = ctx.createLinearGradient(gx1, gy1, gx2, gy2);
+    const baseColor = p[i % p.length];
+    grad.addColorStop(0, baseColor + 'ff');
+    grad.addColorStop(1, baseColor + 'bb');
+    ctx.fillStyle = grad;
+    ctx.fill();
+    st += sl;
+  });
+  // Inner hole with gradient
+  const holeGrad = ctx.createRadialGradient(CX, CY-4, 2, CX, CY, IR);
+  holeGrad.addColorStop(0, 'rgba(22,16,6,1)');
+  holeGrad.addColorStop(1, 'rgba(10,8,2,1)');
+  ctx.beginPath();
+  ctx.arc(CX, CY, IR, 0, Math.PI * 2);
+  ctx.fillStyle = holeGrad;
+  ctx.fill();
+  // Outer subtle ring
+  ctx.beginPath();
+  ctx.arc(CX, CY, R + 2, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(212,168,76,0.12)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  // Inner ring accent
+  ctx.beginPath();
+  ctx.arc(CX, CY, IR, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(212,168,76,0.15)';
+  ctx.lineWidth = 0.5;
+  ctx.stroke();
+  leg.innerHTML = en.map(([k, val], i) => `
+    <div class="legitem">
+      <div class="legdot" style="background:${p[i % p.length]};box-shadow:0 0 6px ${p[i % p.length]}80;"></div>
+      <span style="font-size:12px">${esc(k)}: <strong style="color:var(--goldl)">${val}</strong> <span style="color:var(--ts);font-size:11px">${Math.round(val / tot * 100)}%</span></span>
+    </div>`).join('');
+}
+
+function renderShelf() {
+  const shelf = document.getElementById('shelf-display');
+  const books = D.log;
+  if (!books.length) { shelf.innerHTML = '<p class="empty"><div class="empty-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>Build your collection</p>'; return; }
+  const p = pal();
+  shelf.innerHTML = '<div class="shelf-grid">' + books.map((book, idx) => `
+    <div class="book-card" style="border-left-color: ${p[idx % p.length]};" onclick="openRV(D.reviews.find(r => r.title === '${esc(book.title).replace(/'/g, "\\'")}')?.id)">
+      ${book.cover ? `<img src="${book.cover}" class="book-cover" alt="${esc(book.title)}">` : '<div class="book-cover-placeholder"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(212,168,76,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M10 7v8"/></svg></div>'}
+      <div class="book-title">${esc(book.title)}</div>
+      <div class="book-author">${esc(book.author) || 'Unknown'}</div>
+      <div class="book-rating">${'★'.repeat(book.rating)}</div>
+      <div style="color: var(--spice); font-size: 14px;">${'🌶'.repeat(book.spice)}</div>
+    </div>
+  `).join('') + '</div>';
+}
+
+function addRD() {
+  const date = document.getElementById('rdd').value;
+  const val = parseInt(document.getElementById('rdv').value) || 1;
+  const note = getId('rdn');
+  console.log('addRD called with date:', date, 'val:', val, 'note:', note);
+  if (!date) { notify('Pick date.'); return; }
+  D.readDays[date] = { value: val, note };
+  console.log('Added to D.readDays:', D.readDays);
+  saveData();
+  ['rdd', 'rdv', 'rdn'].forEach(id => document.getElementById(id).value = '');
+  renderTracker();
+  notify('✦ Day logged');
+}
+
+function renderTracker() {
+  const sel = document.getElementById('yrsel');
+  if (!sel) return;
+  const now = new Date();
+  const years = [];
+  for (let y = now.getFullYear(); y >= 2020; y--) years.push(y);
+  const cur = parseInt(sel.value) || now.getFullYear();
+  sel.innerHTML = years.map(y => `<option value="${y}"${y === cur ? ' selected' : ''}>${y}</option>`).join('');
+  
+  const year = cur;
+  const yearStr = String(year);
+  const dmap = {};
+  D.log.forEach(e => { if (e.date?.startsWith(yearStr)) dmap[e.date] = (dmap[e.date] || 0) + 1; });
+  Object.entries(D.readDays).forEach(([d, rd]) => { if (d.startsWith(yearStr)) dmap[d] = (dmap[d] || 0) + rd.value; });
+  
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  
+  let html = '<div style="overflow-x:auto;padding-bottom:12px">';
+  
+  // Create 12 month mini-calendars
+  for (let month = 0; month < 12; month++) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    html += `<div style="display:inline-block;margin-right:16px;margin-bottom:16px;vertical-align:top">`;
+    html += `<div style="font-family:var(--fh);font-size:12px;color:var(--goldl);margin-bottom:8px;font-weight:600;letter-spacing:.05em">${MONTHS[month]}</div>`;
+    
+    // Day headers
+    html += `<div style="display:grid;grid-template-columns:repeat(7,20px);gap:2px;margin-bottom:4px">`;
+    DAY_LABELS.forEach(day => {
+      html += `<div style="font-family:var(--fh);font-size:8px;color:var(--ts);text-align:center;font-weight:600;height:16px;line-height:16px">${day.substring(0,1)}</div>`;
+    });
+    html += `</div>`;
+    
+    // Calendar grid
+    html += `<div style="display:grid;grid-template-columns:repeat(7,20px);gap:2px">`;
+    
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      html += `<div style="width:18px;height:18px"></div>`;
+    }
+    
+    // Days of month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const cnt = dmap[dateStr] || 0;
+      const lvl = cnt === 0 ? 0 : cnt === 1 ? 1 : cnt === 2 ? 2 : cnt <= 4 ? 3 : 4;
+      const label = `${dateStr}: ${cnt > 0 ? cnt + ' session' + (cnt > 1 ? 's' : '') : 'no reading'}`;
+      html += `<div class="hm-cell${lvl ? ' l' + lvl : ''}" style="width:18px;height:18px" title="${label}" onmouseenter="showTip(event,'${label}')" onmouseleave="hideTip()"></div>`;
+    }
+    
+    html += `</div></div>`;
+  }
+  
+  html += `</div>`;
+  document.getElementById('hmwrap').innerHTML = html;
+  
+  const daysRead = Object.keys({...dmap}).filter(d => d.startsWith(yearStr) && dmap[d] > 0).length;
+  const booksRead = D.log.filter(e => e.date?.startsWith(yearStr)).length;
+  const longest = calcLongest(dmap, yearStr);
+  const current = calcCurrent(dmap);
+  document.getElementById('yrstats').innerHTML = `
+    <div class="ys"><div class="ysn">${daysRead}</div><div class="ysl">Days Read</div></div>
+    <div class="ys"><div class="ysn">${booksRead}</div><div class="ysl">Books</div></div>
+    <div class="ys"><div class="ysn">${longest}</div><div class="ysl">Longest</div></div>
+    <div class="ys"><div class="ysn">${current}</div><div class="ysl">Current</div></div>
+    <div class="ys"><div class="ysn">${daysRead > 0 ? Math.round(daysRead / 365 * 100) : 0}%</div><div class="ysl">% Year</div></div>
+  `;
+}
+
+function calcLongest(dm, yearStr) {
+  let max = 0, cur = 0;
+  const year = parseInt(yearStr);
+  const s = new Date(year, 0, 1), e = new Date(year, 11, 31);
+  for (let d = new Date(s); d <= e; d.setDate(d.getDate() + 1)) {
+    const ds = d.toISOString().slice(0, 10);
+    dm[ds] > 0 ? (cur++, max = Math.max(max, cur)) : cur = 0;
+  }
+  return max;
+}
+
+function calcCurrent(dm) {
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    const ds = d.toISOString().slice(0, 10);
+    if (dm[ds] > 0) streak++;
+    else if (i > 0) break;
+  }
+  return streak;
+}
+
+function showTip(e, label) {
+  const t = document.getElementById('tip');
+  t.style.display = 'block';
+  t.style.left = (e.clientX + 10) + 'px';
+  t.style.top = (e.clientY - 32) + 'px';
+  t.textContent = label;
+}
+
+function hideTip() { document.getElementById('tip').style.display = 'none'; }
+
+function nav(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.getElementById('page-' + page).classList.add('on');
+  document.querySelectorAll('.nbtn').forEach(btn => btn.classList.remove('on'));
+  event.target.classList.add('on');
+  if (page === 'overview') renderOverview();
+  if (page === 'shelf') renderShelf();
+  if (page === 'tracker') renderTracker();
+  if (page === 'goal') renderGoal();
+}
+
+function getId(id) { return document.getElementById(id)?.value?.trim() || ''; }
+function esc(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+let notificationTimeouts = [];
+function notify(msg) {
+  const n = document.createElement('div');
+  n.className = 'notif on';
+  n.textContent = msg;
+  document.body.appendChild(n);
+  
+  const timeout = setTimeout(() => {
+    n.classList.remove('on');
+    setTimeout(() => n.remove(), 400);
+  }, 3000);
+  
+  notificationTimeouts.push(timeout);
+}
+
+
+
+</script>
+
+<script>
+(function() {
+  // Hide splash screen after 6 seconds
+  function hideSplash() {
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.classList.add('fade-out');
+      setTimeout(() => {
+        splash.style.display = 'none';
+      }, 800);
+    }
+  }
+
+  // Display splash for 6 seconds (5-7 second range)
+  setTimeout(hideSplash, 6000);
+})();
+</script>
+
+</body>
+</html>
