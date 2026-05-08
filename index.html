@@ -2448,12 +2448,14 @@ window.addEventListener('DOMContentLoaded', async () => {
   // Detect Supabase password-recovery link — the hash contains #access_token=...&type=recovery
   // Show the reset UI immediately before any auth session is restored
   const hash = window.location.hash;
-  if (hash.includes('type=recovery')) {
-    // Init Supabase first so updateUser() will work
-    await initSupabase();
-    showResetPasswordPanel();
-    // Let onAuthStateChange handle the rest (it will also call showResetPasswordPanel)
-    return;
+if (hash.includes('type=recovery')) {
+  await initSupabase();
+
+  // clears recovery token from URL immediately
+  history.replaceState(null, '', window.location.pathname);
+
+  showResetPasswordPanel();
+  return;
   }
 
   // Wait for Supabase to finish initializing
